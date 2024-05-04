@@ -1,5 +1,14 @@
 # zprofile для Школы 21
-Добавляет некоторые 
+
+## Установка
+Скачайте и выполните скрипт [update.sh](https://github.com/macygabr/ZprofileForMac/blob/main/update.sh).
+
+Или воспользуйтесь следующей командой.
+```bash
+curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
+```
+
+## Новые функции
 
 1. **brsw**
    - Активируется при любом запуске терминала

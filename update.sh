@@ -1,4 +1,7 @@
-curl https://raw.githubusercontent.com/yellowja/s21_ZprofileForMac/main/.zprofile > ~/.zprofile
+if [ ! -d ~/.zprofile.backup ]; then
+    cp ~/.zprofile ~/.zprofile.backup
+fi
+curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
 
 DARKYELLOW="\033[33m"
 BLUE=$'\033[0;34m'

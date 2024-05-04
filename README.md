@@ -1,6 +1,14 @@
 # zprofile for School 21
 
-Adds several functionalities:
+## Installation
+Download and execute the script [update.sh](https://github.com/macygabr/ZprofileForMac/blob/main/update.sh).
+
+Alternatively, use the following command.
+```bash
+curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
+```
+
+## New Features
 
 1. **brsw**
    - Activates upon launching the terminal.
