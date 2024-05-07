@@ -133,3 +133,63 @@ rm -rf ~/Library/Application\ Support/Code/CachedData 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtension 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtensions 2>/dev/zero
 }
+
+
+function roll {
+roll=$((RANDOM % 6 + 1))
+
+# Функция для вывода визуального представления кубика
+print_dice() {
+    case $1 in
+        1)
+            echo " -----
+|     |
+|  *  |
+|     |
+ -----
+"
+            ;;
+        2)
+            echo " -----
+| *   |
+|     |
+|   * |
+ -----
+"
+            ;;
+        3)
+            echo " -----
+| *   |
+|  *  |
+|   * |
+ -----
+"
+            ;;
+        4)
+            echo " -----
+| * * |
+|     |
+| * * |
+ -----
+"
+            ;;
+        5)
+            echo " -----
+| * * |
+|  *  |
+| * * |
+ -----
+"
+            ;;
+        6)
+            echo " -----
+| * * |
+| * * |
+| * * |
+ -----
+"
+            ;;
+    esac
+}
+print_dice $roll
+}
