@@ -1,38 +1,48 @@
-# zprofile for School 21
+# zprofile для Школы 21
 
-Adds several functionalities:
+## Установка
+Скачайте и выполните скрипт [update.sh](https://github.com/macygabr/ZprofileForMac/blob/main/update.sh).
+
+Или воспользуйтесь следующей командой.
+```bash
+curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
+```
+
+## Новые функции
 
 1. **brsw**
-   - Activates upon launching the terminal.
-   - Downloads and installs `homebrew` into `goinfre`, along with `lcov`, if `homebrew` is not installed.
-   - Loads environment variables for `homebrew` if it's not installed.
-   
+   - Активируется при любом запуске терминала
+   - При отсутсвии `homebrew` скачивает его в `goinfre` и устанавливает `lcov`.
+   - При присутствии `homebrew` загружает его переменные среды
 2. **clone (git-project-link)**:
-   - Clones a project from the specified Git repository.
-   - Creates a `develop` branch.
-   - Adds `.DS_Store` to the `.gitignore` file.
-   - Opens the project in Visual Studio Code.
-   - Usage example: `clone https://github.com/username/project.git`.
+   - Клонирует проект из указанного репозитория Git.
+   - Создает ветку `develop`.
+   - Добавляет `.DS_Store` в файл `.gitignore`.
+   - Открывает проект в Visual Studio Code.
+   - Пример использования: `clone https://github.com/username/project.git`.
 
 3. **check (git-project-link)**:
-   - Clones a project from the specified Git repository.
-   - Switches to the `develop` branch.
-   - Checks formatting using `clang-format` and `cppcheck`.
-   - Opens the project in Visual Studio Code for further editing and checking.
-   - Usage example: `check https://github.com/username/project.git`.
+   - Клонирует проект из указанного репозитория Git.
+   - Переключается на ветку `develop`.
+   - Проверяет форматирование с помощью `clang-format` и `cppcheck`.
+   - Открывает проект в Visual Studio Code для дальнейшего редактирования и проверки.
+   - Пример использования: `check https://github.com/username/project.git`.
 
 4. **code [path]**:
-   - Opens a file or directory in Visual Studio Code.
-   - Usage example: `code .`, `code path/to/file`.
+   - Открывает файл или каталог в Visual Studio Code.
+   - Пример использования: `code .`, `code path/to/file`.
 
 5. **push [commit]**:
-   - Checks formatting using `clang-format` in `.c`, `.cc`, `.h`, `.cpp` files.
-   - Creates a `develop` branch if it doesn't exist.
-   - Commits changes with the specified message, or with the default message "backup".
-   - Pushes changes to the remote repository.
-   - Usage example: `push "Commit message"`, `push`.
+   - Проверяет форматирование с помощью `clang-format` в файлах `*.c`, `*.cc`, `*.h`, `*.cpp`.
+   - Создает ветку `develop`, если она не существует.
+   - Коммитит изменения с указанным сообщением, либо с сообщением "backup" по умолчанию.
+   - Пушит изменения в удаленный репозиторий.
+   - Пример использования: `push "Commit message"`, `push`.
 
 6. **clean**:
-   - Cleans various temporary files and caches to free up memory.
-   - Removes temporary files, Slack caches, `42_cache`, VS Code, Firefox, and others.
-   - Usage example: `clean`.
+   - Очищает различные временные файлы и кэши для освобождения памяти.
+   - Удаляет временные файлы, кэши Slack, 42_cache, VS Code, Firefox и другие.
+   - Пример использования: `clean`.
+7. roll:
+   - Игральная кость.
+   - Пример использования: `roll`.
