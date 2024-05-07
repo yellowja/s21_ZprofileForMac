@@ -13,7 +13,7 @@ curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > 
 1. **brsw**
    - Активируется при любом запуске терминала
    - При отсутсвии `homebrew` скачивает его в `goinfre` и устанавливает `lcov`.
-   - При отсутсвии `homebrew` загружает его переменные среды
+   - При присутствии `homebrew` загружает его переменные среды
 2. **clone (git-project-link)**:
    - Клонирует проект из указанного репозитория Git.
    - Создает ветку `develop`.
