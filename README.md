@@ -43,3 +43,6 @@ curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > 
    - Очищает различные временные файлы и кэши для освобождения памяти.
    - Удаляет временные файлы, кэши Slack, 42_cache, VS Code, Firefox и другие.
    - Пример использования: `clean`.
+7. roll:
+   - Игральная кость.
+   - Пример использования: roll.
