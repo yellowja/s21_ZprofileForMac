@@ -138,7 +138,6 @@ rm -rf ~/Library/Application\ Support/Code/CachedExtensions 2>/dev/zero
 function roll {
 roll=$((RANDOM % 6 + 1))
 
-# Функция для вывода визуального представления кубика
 print_dice() {
     case $1 in
         1)
