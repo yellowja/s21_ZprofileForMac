@@ -45,4 +45,4 @@ curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > 
    - Пример использования: `clean`.
 7. roll:
    - Игральная кость.
-   - Пример использования: roll.
+   - Пример использования: `roll`.
