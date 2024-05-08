@@ -192,3 +192,7 @@ print_dice() {
 }
 print_dice $roll
 }
+
+function wttr {
+curl wttr.in/?lang=ru
+}
