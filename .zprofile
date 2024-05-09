@@ -33,6 +33,7 @@ function brsw {
   brew install lcov
  fi
 }
+
 brsw
 
 function check {
