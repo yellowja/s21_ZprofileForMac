@@ -34,6 +34,8 @@ function brsw {
  fi
 }
 
+brsw
+
 function check {
 echo '[32mClone[0m'
 git clone $1
