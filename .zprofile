@@ -194,5 +194,5 @@ print_dice $roll
 }
 
 function wttr {
-curl wttr.in/?lang=ru
+curl "https://wttr.in/?lang=ru"
 }
