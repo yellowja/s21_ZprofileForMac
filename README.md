@@ -46,3 +46,6 @@ curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > 
 7. roll:
    - Игральная кость.
    - Пример использования: `roll`.
+8. wttr:
+   - Отображает погоду в Новосибирске через сервис wttr.in.
+   - Пример использования: wttr.
