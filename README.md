@@ -48,4 +48,4 @@ curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > 
    - Пример использования: `roll`.
 8. wttr:
    - Отображает погоду в Новосибирске через сервис wttr.in.
-   - Пример использования: wttr.
+   - Пример использования: `wttr`.
