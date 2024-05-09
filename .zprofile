@@ -133,6 +133,12 @@ rm -rf ~/Library/Caches 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedData 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtension 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtensions 2>/dev/zero
+# Space after cleanup
+echo "$cyan"'----|After  cleanup|----|'
+echo "$blue"'Size  '"$cyan"'|  '"$red"'Used  '"$cyan"'|  '"$green"'Avail '"$cyan"'|'"$reset"
+df -h | grep Users | awk -v cyan="$cyan" -v green="$green" -v blue="$blue" -v red="$red" '{print blue $2 " "cyan"=  " red $3 cyan" +  "  green $4 " "cyan"|"}'
+echo -n "$reset"
+echo "$cyan"'----|Cleanup  ended|----|'
 }
 
 
