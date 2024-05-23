@@ -133,6 +133,12 @@ rm -rf ~/Library/Caches 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedData 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtension 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtensions 2>/dev/zero
+# Space after cleanup
+echo "$cyan"'----|After  cleanup|----|'
+echo "$blue"'Size  '"$cyan"'|  '"$red"'Used  '"$cyan"'|  '"$green"'Avail '"$cyan"'|'"$reset"
+df -h | grep Users | awk -v cyan="$cyan" -v green="$green" -v blue="$blue" -v red="$red" '{print blue $2 " "cyan"=  " red $3 cyan" +  "  green $4 " "cyan"|"}'
+echo -n "$reset"
+echo "$cyan"'----|Cleanup  ended|----|'
 }
 
 
@@ -142,54 +148,58 @@ roll=$((RANDOM % 6 + 1))
 print_dice() {
     case $1 in
         1)
-            echo " -----
-|     |
-|  *  |
-|     |
- -----
+            echo "┌─────┐
+│     │
+│  *  │
+│     │
+└─────┘
 "
             ;;
         2)
-            echo " -----
-| *   |
-|     |
-|   * |
- -----
+            echo "┌─────┐
+│ *   │
+│     │
+│   * │
+└─────┘
 "
             ;;
         3)
-            echo " -----
-| *   |
-|  *  |
-|   * |
- -----
+            echo "┌─────┐
+│ *   │
+│  *  │
+│   * │
+└─────┘
 "
             ;;
         4)
-            echo " -----
-| * * |
-|     |
-| * * |
- -----
+            echo "┌─────┐
+│ * * │
+│     │
+│ * * │
+└─────┘
 "
             ;;
         5)
-            echo " -----
-| * * |
-|  *  |
-| * * |
- -----
+            echo "┌─────┐
+│ * * │
+│  *  │
+│ * * │
+└─────┘
 "
             ;;
         6)
-            echo " -----
-| * * |
-| * * |
-| * * |
- -----
+            echo "┌─────┐
+│ * * │
+│ * * │
+│ * * │
+└─────┘
 "
             ;;
     esac
 }
 print_dice $roll
+}
+
+function wttr {
+curl "https://wttr.in/Novosibirsk?lang=ru"
 }
