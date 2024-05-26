@@ -2,11 +2,10 @@ function push {
 #Default commit 'backup'
   cd $(pwd)
   find . -type f  -name *.cc -o -name *.h -o -name *.cpp | xargs clang-format -style='{BasedOnStyle: Google}' -i
-  if [ -n $1 ]
-  then
+  if [ -n "$1" ]; then
     commit=$1
   else
-  commit=backup
+    commit="backup"
   fi
   git checkout -b develop
   git checkout develop
