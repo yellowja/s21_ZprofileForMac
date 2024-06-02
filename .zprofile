@@ -214,6 +214,9 @@ DMG_FILE="qt-creator-opensource-mac-x86_64-7.0.0.dmg"
 # Папка для установки
 INSTALL_DIR="/opt/goinfre/$(whoami)"
 
+# Путь для символической ссылки в /Applications
+LINK_PATH="/Applications/Qt Creator.app"
+
 # Скачиваем .dmg файл
 curl "$DMG_URL" -L -o "$DMG_FILE"
 
