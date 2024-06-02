@@ -212,7 +212,7 @@ DMG_URL="https://downloader.disk.yandex.ru/disk/0d2e94b1a41f6d370484e573e5a0236b
 DMG_FILE="qt-creator-opensource-mac-x86_64-7.0.0.dmg"
 
 # Папка для установки
-INSTALL_DIR="/opt/goinfre/$(whoami)/qt-creator"
+INSTALL_DIR="/opt/goinfre/$(whoami)"
 
 # Скачиваем .dmg файл
 curl "$DMG_URL" -L -o "$DMG_FILE"
