@@ -220,7 +220,7 @@ curl "$DMG_URL" -L -o "$DMG_FILE"
 # Проверка успешности загрузки
 if [ $? -ne 0 ]; then
     echo "Ошибка при скачивании файла."
-    exit 1
+    return 1
 fi
 
 # Создаем папку для установки, если её нет
@@ -232,7 +232,7 @@ hdiutil attach "$DMG_FILE" -nobrowse -mountpoint /Volumes/qt-creator
 # Проверка успешности монтирования
 if [ $? -ne 0 ]; then
     echo "Ошибка при монтировании .dmg файла."
-    exit 1
+    return 1
 fi
 
 # Копируем содержимое из смонтированного образа в папку установки
@@ -244,7 +244,7 @@ hdiutil detach /Volumes/qt-creator
 # Проверка успешности демонтажа
 if [ $? -ne 0 ]; then
     echo "Ошибка при демонтаже .dmg файла."
-    exit 1
+    return 1
 fi
 
 # Создаем символическую ссылку в /Applications
@@ -253,7 +253,7 @@ ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH"
 # Проверка успешности создания символической ссылки
 if [ $? -ne 0 ]; then
     echo "Ошибка при создании символической ссылки."
-    exit 1
+    return 1
 fi
 
 # Удаляем .dmg файл
