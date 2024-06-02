@@ -262,5 +262,5 @@ if [ $? -ne 0 ]; then
     return 1
 fi
 
-echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR и добавлен в Launchpad."
+echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR и добавлен в Launchpad.\nВ настройках укажите путь до /usr/local/Qt-6.6.2/bin/qmake6"
 }
