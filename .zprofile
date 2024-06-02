@@ -204,7 +204,7 @@ function wttr {
 curl "https://wttr.in/Novosibirsk?lang=ru"
 }
 
-qtinstall() {
+function qtinstall() {
 # Путь к .dmg файлу
 DMG_URL="https://qt-mirror.dannhauer.de/archive/qtcreator/7.0/7.0.0/qt-creator-opensource-mac-x86_64-7.0.0.dmg"
 
