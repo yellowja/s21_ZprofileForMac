@@ -247,8 +247,17 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Создаем символическую ссылку в /Applications
+ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH"
+
+# Проверка успешности создания символической ссылки
+if [ $? -ne 0 ]; then
+    echo "Ошибка при создании символической ссылки."
+    exit 1
+fi
+
 # Удаляем .dmg файл
 rm "$DMG_FILE"
 
-echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR"
+echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR и добавлен в Launchpad."
 }
