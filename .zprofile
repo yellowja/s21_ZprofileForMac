@@ -203,3 +203,52 @@ print_dice $roll
 function wttr {
 curl "https://wttr.in/Novosibirsk?lang=ru"
 }
+
+qtinstall() {
+# Путь к .dmg файлу
+DMG_URL="https://downloader.disk.yandex.ru/disk/0d2e94b1a41f6d370484e573e5a0236b35affd3379b63e48f59cef3ea50b6e6e/665c8fa1/6gWDfKY9Uw-ziZVbyZyBDwDln-_vXvNn9LRZaNMc3Fn24EMSrUkONwUYXEQ1ASiGPoUFQNpsY4bYsmf32pkLyQ%3D%3D?uid=0&filename=qt-creator-opensource-mac-x86_64-7.0.0.dmg&disposition=attachment&hash=U0Z2ycdXZw3rbxPoy5BwTQPYbrQ4O21l/4eykFTX3bN%2BA1mDtC2nzxS0fFHXrlZNq/J6bpmRyOJonT3VoXnDag%3D%3D&limit=0&content_type=application%2Fx-bzip2&owner_uid=123224278&fsize=383673013&hid=d5bed3ed8a734d60ccf8f5cc69fb8275&media_type=compressed&tknv=v2"
+
+# Имя .dmg файла
+DMG_FILE="qt-creator-opensource-mac-x86_64-7.0.0.dmg"
+
+# Папка для установки
+INSTALL_DIR="/opt/goinfre/$(whoami)/qt-creator"
+
+# Скачиваем .dmg файл
+curl "$DMG_URL" -L -o "$DMG_FILE"
+
+# Проверка успешности загрузки
+if [ $? -ne 0 ]; then
+    echo "Ошибка при скачивании файла."
+    exit 1
+fi
+
+# Создаем папку для установки, если её нет
+mkdir -p "$INSTALL_DIR"
+
+# Монтируем .dmg файл
+hdiutil attach "$DMG_FILE" -nobrowse -mountpoint /Volumes/qt-creator
+
+# Проверка успешности монтирования
+if [ $? -ne 0 ]; then
+    echo "Ошибка при монтировании .dmg файла."
+    exit 1
+fi
+
+# Копируем содержимое из смонтированного образа в папку установки
+cp -R /Volumes/qt-creator/Qt\ Creator.app "$INSTALL_DIR"
+
+# Демонтируем .dmg файл
+hdiutil detach /Volumes/qt-creator
+
+# Проверка успешности демонтажа
+if [ $? -ne 0 ]; then
+    echo "Ошибка при демонтаже .dmg файла."
+    exit 1
+fi
+
+# Удаляем .dmg файл
+rm "$DMG_FILE"
+
+echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR"
+}
