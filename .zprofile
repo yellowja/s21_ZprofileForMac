@@ -215,7 +215,7 @@ DMG_FILE="qt-creator-opensource-mac-x86_64-7.0.0.dmg"
 INSTALL_DIR="/opt/goinfre/$(whoami)"
 
 # Путь для символической ссылки в /Applications
-LINK_PATH="/Applications/Qt Creator.app"
+LINK_PATH="/Users/$(whoami)/Applications"
 
 # Скачиваем .dmg файл
 curl "$DMG_URL" -L -o "$DMG_FILE"
@@ -250,17 +250,17 @@ if [ $? -ne 0 ]; then
     return 1
 fi
 
+# Удаляем .dmg файл
+rm "$DMG_FILE"
+
 # Создаем символическую ссылку в /Applications
-ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH"
+ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH/Qt Creator.app"
 
 # Проверка успешности создания символической ссылки
 if [ $? -ne 0 ]; then
     echo "Ошибка при создании символической ссылки."
     return 1
 fi
-
-# Удаляем .dmg файл
-rm "$DMG_FILE"
 
 echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR и добавлен в Launchpad."
 }
