@@ -207,19 +207,15 @@ curl "https://wttr.in/Novosibirsk?lang=ru"
 function qtinstall {
 # Путь к .dmg файлу
 DMG_URL="https://qt-mirror.dannhauer.de/archive/qtcreator/7.0/7.0.0/qt-creator-opensource-mac-x86_64-7.0.0.dmg"
-
 # Имя .dmg файла
 DMG_FILE="qt-creator-opensource-mac-x86_64-7.0.0.dmg"
-
 # Папка для установки
 INSTALL_DIR="/opt/goinfre/$(whoami)"
-
 # Путь для символической ссылки в /Applications
 LINK_PATH="/Users/$(whoami)/Applications"
 
 # Скачиваем .dmg файл
 curl "$DMG_URL" -L -o "$DMG_FILE"
-
 # Проверка успешности загрузки
 if [ $? -ne 0 ]; then
     echo "Ошибка при скачивании файла."
@@ -228,10 +224,8 @@ fi
 
 # Создаем папку для установки, если её нет
 mkdir -p "$INSTALL_DIR"
-
 # Монтируем .dmg файл
 hdiutil attach "$DMG_FILE" -nobrowse -mountpoint /Volumes/qt-creator
-
 # Проверка успешности монтирования
 if [ $? -ne 0 ]; then
     echo "Ошибка при монтировании .dmg файла."
@@ -240,10 +234,8 @@ fi
 
 # Копируем содержимое из смонтированного образа в папку установки
 cp -R /Volumes/qt-creator/Qt\ Creator.app "$INSTALL_DIR"
-
 # Демонтируем .dmg файл
 hdiutil detach /Volumes/qt-creator
-
 # Проверка успешности демонтажа
 if [ $? -ne 0 ]; then
     echo "Ошибка при демонтаже .dmg файла."
@@ -252,15 +244,13 @@ fi
 
 # Удаляем .dmg файл
 rm "$DMG_FILE"
-
 # Создаем символическую ссылку в /Applications
 ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH/Qt Creator.app"
-
 # Проверка успешности создания символической ссылки
 if [ $? -ne 0 ]; then
     echo "Ошибка при создании символической ссылки."
     return 1
 fi
 
-echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR и добавлен в Launchpad.\nВ настройках укажите путь до /usr/local/Qt-6.6.2/bin/qmake6"
+echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR.\nВ настройках укажите путь до /usr/local/Qt-6.6.2/bin/qmake6"
 }

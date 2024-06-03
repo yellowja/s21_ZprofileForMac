@@ -17,4 +17,5 @@ printf "\n${BLUE}push [commit]${DARKYELLOW}\t\t\t\t Checks formatting using clan
 printf "\n${BLUE}clean${DARKYELLOW}\t\t\t\t\t Cleans memory.${END}\n"
 printf "\n${BLUE}roll${DARKYELLOW}\t\t\t\t\t Simulates a dice roll and displays the result.${END}\n"
 printf "\n${BLUE}wttr${DARKYELLOW}\t\t\t\t\t Displays the weather in Novosibirsk using the wttr.in service.${END}\n"
+printf "\n${BLUE}qtinstall${DARKYELLOW}\t\t\t\t Downloads and installs Qt Creator, sets up the application in /opt/goinfre/\n\t\t\t\t\t and creates a symbolic link in /Users/$(whoami)/Applications.${END}\n"
 printf "\n Please, restart your terminal.\n"
