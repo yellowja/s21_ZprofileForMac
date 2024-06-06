@@ -270,11 +270,8 @@ if [ $? -ne 0 ]; then
     return 1
 fi
 
-# Удаляем .dmg файл
 rm "$DMG_FILE"
-# Создаем символическую ссылку в /Applications
 ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH/Qt Creator.app"
-# Проверка успешности создания символической ссылки
 if [ $? -ne 0 ]; then
     echo "Ошибка при создании символической ссылки."
     return 1
