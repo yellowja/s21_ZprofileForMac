@@ -12,7 +12,6 @@ function push {
   for arg in "$@"; do
       if [ "$arg" == "-b" ]; then
           branch=$(git rev-parse --abbrev-ref HEAD)
-          break
       else
           commit=$arg
       fi
