@@ -131,32 +131,31 @@ rm -rf ~/Library/Application\ Support/Telegram\ Desktop/tdata/user_data 2>/dev/z
 rm -rf ~/Library/Caches/ 2>/dev/zero
 rm -rf ~/Library/Containers/com.docker.docker/Data/vms/\* 2>/dev/zero
 rm -rf ~/Library/Group\ Containers/6N38VWS5BX.ru.keepcoder.Telegram/account-570841890615083515/postbox/\* 2>/dev/zero
-
-rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Service\ Worker/CacheStorage 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Yandex/YandexBrowser/Default/Service\ Worker/CacheStorage 2>/dev/zero
-rm -rf ~/Library/Application\ Support/discord/Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/zoom.us/Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Code/Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/GitKraken/Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Google/Chrome/Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Postman/Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Rocket.Chat/Cache 2>/dev/zero
+# betatest cleanup
 rm -rf ~/Library/Application\ Support/Code/CachedExtensionVSIXs 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedProfilesData 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Postman/Partitions 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Google/Chrome/Snapshots 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/logs 2>/dev/zero
-rm -rf ~/Library/Application\ Support/GitKraken/CrashReports 2>/dev/zero
-rm -rf ~/Library/Application\ Support/discord/VideoDecodeStats 2>/dev/zero
-rm -rf ~/Library/Application\ Support/jazz/WebrtcVideoStats 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Code/Code\ Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/GitKraken/Code\ Cache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/discord/Cache 2>/dev/zero
 rm -rf ~/Library/Application\ Support/discord/Code\ Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/jazz/Code\ Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Code/Crashpad 2>/dev/zero
-rm -rf ~/Library/Application\ Support/GitKraken/Crashpad 2>/dev/zero
 rm -rf ~/Library/Application\ Support/discord/Crashpad 2>/dev/zero
+rm -rf ~/Library/Application\ Support/discord/VideoDecodeStats 2>/dev/zero
+rm -rf ~/Library/Application\ Support/GitKraken/Cache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/GitKraken/Code\ Cache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/GitKraken/Crashpad 2>/dev/zero
+rm -rf ~/Library/Application\ Support/GitKraken/CrashReports 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Google/Chrome/Cache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Google/Chrome/Default/Service\ Worker/CacheStorage 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Google/Chrome/Snapshots 2>/dev/zero
+rm -rf ~/Library/Application\ Support/jazz/Code\ Cache 2>/dev/zero
 rm -rf ~/Library/Application\ Support/jazz/Crashpad 2>/dev/zero
+rm -rf ~/Library/Application\ Support/jazz/WebrtcVideoStats 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Postman/Cache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Postman/Partitions 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Rocket.Chat/Cache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Yandex/YandexBrowser/Cache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Yandex/YandexBrowser/Default/Service\ Worker/CacheStorage 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Yandex/YandexBrowser/Snapshots 2>/dev/zero
+rm -rf ~/Library/Application\ Support/zoom.us/Cache 2>/dev/zero
 
 # Space after cleanup
 echo "$cyan"'----|After  cleanup|----|'
