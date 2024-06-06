@@ -110,56 +110,27 @@ df -h | grep Users | awk -v cyan="$cyan" -v green="$green" -v blue="$blue" -v re
 echo -n "$reset"
 
 # Cleanup...
-rm -rf ~/Library/Application\ Support/Slack/Code\ Cache/ 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Slack/Cache/ 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Slack/Service\ Worker/CacheStorage/ 2>/dev/zero
-
-rm -rf ~/Library/42_cache/ 2>/dev/zero
-rm -rf ~/Library/Caches/CloudKit 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.akd 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.ap.adprivacyd 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.appstore 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.appstoreagent 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.cache_delete 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.commerce 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.iCloudHelper 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.imfoundation.IMRemoteURLConnectionAgent 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.keyboardservicesd 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.nbagent 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.nsservicescache.plist 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.nsurlsessiond 2>/dev/zero
-rm -rf ~/Library/Caches/storeassetd 2>/dev/zero
-rm -rf ~/Library/Caches/com.microsoft.VSCode.ShipIt 2>/dev/zero
-rm -rf ~/Library/Caches/com.microsoft.VSCode 2>/dev/zero
-rm -rf ~/Library/Caches/com.google.SoftwareUpdate 2>/dev/zero
-rm -rf ~/Library/Caches/com.google.Keystone 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.touristd 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.tiswitcher.cache 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.preferencepanes.usercache 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.preferencepanes.searchindexcache 2>/dev/zero
-rm -rf ~/Library/Caches/com.apple.parsecd 2>/dev/zero
-rm -rf ~/Library/Caches/ 2>/dev/zero
-rm -rf ~/.Trash/\* 2>/dev/zero
 rm -rf ~/.kube/cache/\* 2>/dev/zero
-rm -rf ~/Library/Containers/com.docker.docker/Data/vms/\* 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Firefox/Profiles/hdsrd79k.default-release/storage 2>/dev/zero
-rm -rf ~/Library/42_cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Code/User/workspaceStorage 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Spotify/PersistentCache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Telegram\ Desktop/tdata/user_data 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Telegram\ Desktop/tdata/emoji 2>/dev/zero
+rm -rf ~/.Trash/\* 2>/dev/zero
+rm -rf ~/Library/42_cache/ 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Code/Cache 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/Cache/Library/Application\ Support/Code/Cachei 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CacheData 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Code/Cache 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Code/Crashpad/completed 2>/dev/zero
-rm -rf ~/Library/Caches/\* 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Slack/Cache/\* 2>/dev/zero
-rm -rf ~/Library/Application\ Support/Slack/Service\ Worker/CacheStorage/\* 2>/dev/zero
-rm -rf ~/Library/Group\ Containers/6N38VWS5BX.ru.keepcoder.Telegram/account-570841890615083515/postbox/\* 2>/dev/zero
-rm -rf ~/Library/Caches 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedData 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtension 2>/dev/zero
 rm -rf ~/Library/Application\ Support/Code/CachedExtensions 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Code/Crashpad/completed 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Code/User/workspaceStorage 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Firefox/Profiles/hdsrd79k.default-release/storage 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Slack/Cache/ 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Slack/Code\ Cache/ 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Slack/Service\ Worker/CacheStorage/ 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Spotify/PersistentCache 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Telegram\ Desktop/tdata/emoji 2>/dev/zero
+rm -rf ~/Library/Application\ Support/Telegram\ Desktop/tdata/user_data 2>/dev/zero
+rm -rf ~/Library/Caches/ 2>/dev/zero
+rm -rf ~/Library/Containers/com.docker.docker/Data/vms/\* 2>/dev/zero
+rm -rf ~/Library/Group\ Containers/6N38VWS5BX.ru.keepcoder.Telegram/account-570841890615083515/postbox/\* 2>/dev/zero
 # Space after cleanup
 echo "$cyan"'----|After  cleanup|----|'
 echo "$blue"'Size  '"$cyan"'|  '"$red"'Used  '"$cyan"'|  '"$green"'Avail '"$cyan"'|'"$reset"
