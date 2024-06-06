@@ -2,21 +2,22 @@
 curl --silent https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
 
 function push {
-#Default commit 'backup'
+#Default commit 'backup' 
   cd $(pwd)
   find . -type f  -name *.c -name *.cc -o -name *.h -o -name *.cpp | xargs clang-format -style='{BasedOnStyle: Google}' -i
 
   branch="develop"
   commit="backup"
+
   for arg in "$@"; do
-      if [ "$arg" = "-b" ]; then
+      if [ "$arg" == "-b" ]; then
           branch=$(git rev-parse --abbrev-ref HEAD)
           break
       else
           commit=$arg
       fi
   done
-  
+
   git checkout -b $branch
   git checkout $branch
   git add .
@@ -97,7 +98,6 @@ function clone {
 }
 
 function clean {
-#!/bin/bash]
 # Colors
 blue=$'[0;34m'
 cyan=$'[1;96m'
