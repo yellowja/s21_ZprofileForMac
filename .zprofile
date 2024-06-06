@@ -1,5 +1,5 @@
-#Default update
-curl --silent https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
+# #Default update
+# curl --silent https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
 
 function push {
 #Default commit 'backup' 
@@ -10,7 +10,7 @@ function push {
   commit="backup"
 
   for arg in "$@"; do
-      if [ "$arg" == "-b" ]; then
+      if [ "$arg" = "-b" ]; then
           branch=$(git rev-parse --abbrev-ref HEAD)
       else
           commit=$arg
@@ -259,11 +259,8 @@ if [ $? -ne 0 ]; then
     return 1
 fi
 
-# Копируем содержимое из смонтированного образа в папку установки
 cp -R /Volumes/qt-creator/Qt\ Creator.app "$INSTALL_DIR"
-# Демонтируем .dmg файл
 hdiutil detach /Volumes/qt-creator
-# Проверка успешности демонтажа
 if [ $? -ne 0 ]; then
     echo "Ошибка при демонтаже .dmg файла."
     return 1
