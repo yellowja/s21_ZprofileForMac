@@ -57,7 +57,7 @@ curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > 
    - Пример использования: `wttr`.
 
 10. **qtinstall**
-   - Скачивает и устанавливает Qt Creator.
-   - Устанавливает программу в папку `/opt/goinfre/$(whoami)`.
-   - Создает символическую ссылку в `/Users/$(whoami)/Applications`.
-   - Пример использования: `qtinstall`.
+    - Скачивает и устанавливает Qt Creator.
+    - Устанавливает программу в папку `/opt/goinfre/$(whoami)`.
+    - Создает символическую ссылку в `/Users/$(whoami)/Applications`.
+    - Пример использования: `qtinstall`.
