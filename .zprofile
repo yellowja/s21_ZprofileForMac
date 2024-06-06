@@ -6,19 +6,17 @@ function push {
   cd $(pwd)
   find . -type f  -name *.c -name *.cc -o -name *.h -o -name *.cpp | xargs clang-format -style='{BasedOnStyle: Google}' -i
 
-  if [ -n "$1" ]; then
-    commit=$1
-  else
-    commit="backup"
-  fi
-
+  branch="develop"
+  commit="backup"
+  for arg in "$@"; do
+      if [ "$arg" = "-b" ]; then
+          branch=$(git rev-parse --abbrev-ref HEAD)
+          break
+      else
+          commit=$arg
+      fi
+  done
   
-  if [ -n "$2" ]; then
-    branch=$(git rev-parse --abbrev-ref HEAD)
-  else
-    branch="develop"
-  fi
-
   git checkout -b $branch
   git checkout $branch
   git add .
