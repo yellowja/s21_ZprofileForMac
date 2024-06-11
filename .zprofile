@@ -1,5 +1,80 @@
-#Default update
-curl --silent https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
+
+function init {
+    function homebrew {
+     if [ -d /opt/goinfre/$(whoami)/homebrew ];
+     then
+      eval "$(/opt/goinfre/$(whoami)/homebrew/bin/brew shellenv)"
+      chmod -R go-w "$(brew --prefix)/share/zsh"
+     else
+      cd /opt/goinfre/$(whoami)
+      git clone https://github.com/Homebrew/brew homebrew
+      eval "$(/opt/goinfre/$(whoami)/homebrew/bin/brew shellenv)"
+      brew update --force --quiet
+      chmod -R go-w "$(brew --prefix)/share/zsh"
+      brew install lcov
+     fi
+    }
+
+    function qtinstall {
+        # Путь к .dmg файлу
+        DMG_URL="https://qt-mirror.dannhauer.de/archive/qtcreator/7.0/7.0.0/qt-creator-opensource-mac-x86_64-7.0.0.dmg"
+        # Имя .dmg файла
+        DMG_FILE="qt-creator-opensource-mac-x86_64-7.0.0.dmg"
+        # Папка для установки
+        INSTALL_DIR="/opt/goinfre/$(whoami)"
+        # Путь для символической ссылки в /Applications
+        LINK_PATH="/Users/$(whoami)/Applications"
+
+        # Скачиваем .dmg файл
+        curl "$DMG_URL" -L -o "$DMG_FILE"
+        # Проверка успешности загрузки
+        if [ $? -ne 0 ]; then
+            echo "Ошибка при скачивании файла."
+            return 1
+        fi
+
+        # Создаем папку для установки, если её нет
+        mkdir -p "$INSTALL_DIR"
+        # Монтируем .dmg файл
+        hdiutil attach "$DMG_FILE" -nobrowse -mountpoint /Volumes/qt-creator
+        # Проверка успешности монтирования
+        if [ $? -ne 0 ]; then
+            echo "Ошибка при монтировании .dmg файла."
+            return 1
+        fi
+
+        cp -R /Volumes/qt-creator/Qt\ Creator.app "$INSTALL_DIR"
+        hdiutil detach /Volumes/qt-creator
+        if [ $? -ne 0 ]; then
+            echo "Ошибка при демонтаже .dmg файла."
+            return 1
+        fi
+
+        rm "$DMG_FILE"
+        ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH/Qt Creator.app"
+        if [ $? -ne 0 ]; then
+            echo "Ошибка при создании символической ссылки."
+            return 1
+        fi
+
+        echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR.\nВ настройках укажите путь до /usr/local/Qt-6.6.2/bin/qmake6"
+    }
+
+    if [ "$1" = "-java" ]; then
+      homebrew
+      brew install maven
+      brew install openjdk
+    fi
+    
+    if [ "$1" = "-brew" ]; then
+      homebrew
+    fi
+
+    if [ "$1" = "-qt" ]; then
+      qtinstall
+    fi
+
+}
 
 function push {
 #Default commit 'backup' 
@@ -27,23 +102,6 @@ function push {
 function code {
   open -a 'Visual Studio Code' $1
 }
-
-function brsw {
- if [ -d /opt/goinfre/$(whoami)/homebrew ];
- then
-  eval "$(/opt/goinfre/$(whoami)/homebrew/bin/brew shellenv)"
-  chmod -R go-w "$(brew --prefix)/share/zsh"
- else
-  cd /opt/goinfre/$(whoami)
-  git clone https://github.com/Homebrew/brew homebrew
-  eval "$(/opt/goinfre/$(whoami)/homebrew/bin/brew shellenv)"
-  brew update --force --quiet
-  chmod -R go-w "$(brew --prefix)/share/zsh"
-  brew install lcov
- fi
-}
-
-brsw
 
 function help {
   DARKYELLOW="\033[33m"
@@ -80,20 +138,6 @@ function check {
   echo '[32mCpp check[0m'
   cppcheck --enable=all --suppress=missingIncludeSystem *.c *.h *.cpp *.cc
   return 0
-}
-
-function clone {
-  echo '[32mClone[0m'
-  git clone $1
-  cd $(echo $1 | awk -F / '{print $NF}' | sed -r 's/.git+//')
-  git checkout -b develop
-  echo '[32mChange gitignore[0m'
-  sleep 1
-  echo '
-# My ignore list' >> .gitignore
-  echo '.DS_Store' >> .gitignore
-  code .
-  push start
 }
 
 function clean {
@@ -231,47 +275,10 @@ function wttr {
 curl "https://wttr.in/Novosibirsk?lang=ru"
 }
 
-function qtinstall {
-# Путь к .dmg файлу
-DMG_URL="https://qt-mirror.dannhauer.de/archive/qtcreator/7.0/7.0.0/qt-creator-opensource-mac-x86_64-7.0.0.dmg"
-# Имя .dmg файла
-DMG_FILE="qt-creator-opensource-mac-x86_64-7.0.0.dmg"
-# Папка для установки
-INSTALL_DIR="/opt/goinfre/$(whoami)"
-# Путь для символической ссылки в /Applications
-LINK_PATH="/Users/$(whoami)/Applications"
 
-# Скачиваем .dmg файл
-curl "$DMG_URL" -L -o "$DMG_FILE"
-# Проверка успешности загрузки
-if [ $? -ne 0 ]; then
-    echo "Ошибка при скачивании файла."
-    return 1
-fi
-
-# Создаем папку для установки, если её нет
-mkdir -p "$INSTALL_DIR"
-# Монтируем .dmg файл
-hdiutil attach "$DMG_FILE" -nobrowse -mountpoint /Volumes/qt-creator
-# Проверка успешности монтирования
-if [ $? -ne 0 ]; then
-    echo "Ошибка при монтировании .dmg файла."
-    return 1
-fi
-
-cp -R /Volumes/qt-creator/Qt\ Creator.app "$INSTALL_DIR"
-hdiutil detach /Volumes/qt-creator
-if [ $? -ne 0 ]; then
-    echo "Ошибка при демонтаже .dmg файла."
-    return 1
-fi
-
-rm "$DMG_FILE"
-ln -s "$INSTALL_DIR/Qt Creator.app" "$LINK_PATH/Qt Creator.app"
-if [ $? -ne 0 ]; then
-    echo "Ошибка при создании символической ссылки."
-    return 1
-fi
-
-echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR.\nВ настройках укажите путь до /usr/local/Qt-6.6.2/bin/qmake6"
-}
+#Default update and backup
+cp ~/.zprofile ~/.zprofile.backup
+curl --silent https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
+#Primary functions
+init -brew
+ls -la
