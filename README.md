@@ -1,7 +1,6 @@
 # zprofile для Школы 21
 
 ## Установка
-<!-- Скачайте и выполните скрипт [update.sh](https://github.com/macygabr/ZprofileForMac/blob/main/update.sh). -->
 
 Воспользуйтесь следующей командой:
 ```bash
