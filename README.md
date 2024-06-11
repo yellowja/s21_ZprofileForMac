@@ -25,7 +25,7 @@ curl https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > 
       - Скачивает и устанавливает Qt Creator.
       - Устанавливает программу в папку `/opt/goinfre/$(whoami)`.
       - Создает символическую ссылку в `/Users/$(whoami)/Applications`.
-      - Пример использования: `qtinstall`.
+      - Пример использования: `init -qt`.
 
 3. **check (git-project-link)**
    - Клонирует проект из указанного репозитория Git.
