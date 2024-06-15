@@ -273,9 +273,5 @@ curl "https://wttr.in/Novosibirsk?lang=ru"
 }
 
 
-#Default update and backup
-cp ~/.zprofile ~/.zprofile.backup
+#Default update
 curl --silent https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
-#Primary functions
-init -brew
-ls -la
