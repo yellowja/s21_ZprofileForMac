@@ -62,8 +62,8 @@ function init {
 
     if [ "$1" = "-java" ]; then
       homebrew
-      brew install maven
-      brew install openjdk
+      brew install maven #install maven in homebrew
+      brew install openjdk #install openjdk in homebrew
     fi
     
     if [ "$1" = "-brew" ]; then
