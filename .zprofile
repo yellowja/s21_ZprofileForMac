@@ -87,14 +87,14 @@ function push {
       if [ "$arg" = "-d" ]; then
             # Create a development branch when using the -d flag.
             branch="develop"
+            git checkout -b $branch
+            git checkout $branch
       else
           commit=$arg
       fi
   done
 
-  git checkout -b $branch
-  git checkout $branch
-  git add .
+  git add --all
   git commit -m $commit
   git push --set-upstream origin $branch
 }
