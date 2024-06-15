@@ -62,8 +62,8 @@ function init {
 
     if [ "$1" = "-java" ]; then
       homebrew
-      brew install maven #install maven in homebrew
-      brew install openjdk #install openjdk in homebrew
+      brew install maven
+      brew install openjdk
     fi
     
     if [ "$1" = "-brew" ]; then
@@ -87,13 +87,13 @@ function push {
       if [ "$arg" = "-d" ]; then
             # Create a development branch when using the -d flag.
             branch="develop"
-            git checkout -b $branch
-            git checkout $branch
       else
           commit=$arg
       fi
   done
 
+  git checkout -b $branch
+  git checkout $branch
   git add .
   git commit -m $commit
   git push --set-upstream origin $branch
