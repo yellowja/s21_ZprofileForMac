@@ -15,7 +15,7 @@ cp -n ~/.zprofile ~/.zprofile.backup && curl https://raw.githubusercontent.com/m
 
 2. **init (-flag)**
    -  ***-brew***
-      - При любом запуске терминала и отсутствии `homebrew` скачивает его в `goinfre` и устанавливает `lcov`.
+      - Cкачивает `homebrew` в `goinfre` и устанавливает `lcov`.
       - При присутствии `homebrew` загружает его переменные среды.
       - Пример использования: `init -brew`.
    -  ***-java***
@@ -38,10 +38,10 @@ cp -n ~/.zprofile ~/.zprofile.backup && curl https://raw.githubusercontent.com/m
 
 4. **push [commit]**
    - Проверяет форматирование с помощью `clang-format` в файлах `*.c`, `*.cc`, `*.h`, `*.cpp`.
-   - Если был использован флаг `-b`, то будет использоваться текущая ветка git, иначе cоздает/использует ветку `develop`.
+   - Если был использован флаг `-d`, cоздает/использует ветку `develop`, иначе будет использоваться текущая ветка git.
    - Коммитит изменения с указанным сообщением, либо с сообщением "backup" по умолчанию.
    - Пушит изменения в удаленный репозиторий.
-   - Пример использования: `push "Commit message"`, `push`, `push -b "Commit message"`, `push -b`.
+   - Пример использования: `push "Commit message"`, `push`, `push -d "Commit message"`, `push -d`.
 
 5. **code [path]**
    - Открывает файл или каталог в Visual Studio Code.

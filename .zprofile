@@ -77,23 +77,22 @@ function init {
 }
 
 function push {
-#Default commit 'backup' 
   cd $(pwd)
   find . -type f  -name *.c -name *.cc -o -name *.h -o -name *.cpp | xargs clang-format -style='{BasedOnStyle: Google}' -i
 
-  branch="develop"
+  branch=$(git rev-parse --abbrev-ref HEAD)
   commit="backup"
 
   for arg in "$@"; do
-      if [ "$arg" = "-b" ]; then
-          branch=$(git rev-parse --abbrev-ref HEAD)
+      if [ "$arg" = "-d" ]; then
+            branch="develop"
+            git checkout -b $branch
+            git checkout $branch
       else
           commit=$arg
       fi
   done
 
-  git checkout -b $branch
-  git checkout $branch
   git add .
   git commit -m $commit
   git push --set-upstream origin $branch
