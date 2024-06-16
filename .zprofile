@@ -85,7 +85,6 @@ function push {
 
   for arg in "$@"; do
       if [ "$arg" = "-d" ]; then
-            # Create a development branch when using the -d flag.
             branch="develop"
             git checkout -b $branch
             git checkout $branch
