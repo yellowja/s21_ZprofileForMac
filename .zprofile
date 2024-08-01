@@ -398,4 +398,4 @@ then
  chmod -R go-w "$(brew --prefix)/share/zsh"
 fi
 
-rm -rf ~/Desktop/hello;
+dockerln;
