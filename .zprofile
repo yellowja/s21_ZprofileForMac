@@ -371,7 +371,7 @@ for arg in "$@"; do
 curl --silent https://raw.githubusercontent.com/macygabr/ZprofileForMac/main/.zprofile > ~/.zprofile
 
 #Default clean
-clean
+clean > /dev/null
 
 #Default install homebrew
 if [ -d /opt/goinfre/$(whoami)/homebrew ];
