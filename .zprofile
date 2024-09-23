@@ -59,6 +59,7 @@ function init {
     
     if [ "$1" = "-qt" ]; then
       installdmg "https://qt-mirror.dannhauer.de/archive/qtcreator/7.0/7.0.0/qt-creator-opensource-mac-x86_64-7.0.0.dmg"
+      echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR.\nВ настройках укажите путь до /usr/local/Qt-6.6.2/bin/qmake6"
     fi
 
     if [ "$1" = "-torb" ]; then
