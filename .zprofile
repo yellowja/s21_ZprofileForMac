@@ -99,23 +99,25 @@ function help {
 }
 
 function check {
-  echo -e '\033[32mClone\033[0m'
-  git clone "$1"
-  if [ $? -ne 0 ]; then
-    echo -e '\033[31mОшибка: не удалось клонировать репозиторий\033[0m'
-    return 1
+  if [ -n "$1" ]; then
+    echo -e '\033[32mClone\033[0m'
+    git clone "$1"
+    if [ $? -ne 0 ]; then
+      echo -e '\033[31mОшибка: не удалось клонировать репозиторий\033[0m'
+      return 1
+    fi
+
+    REPO_NAME=$(echo "$1" | awk -F / '{print $NF}' | sed -r 's/.git+//')
+    cd "$REPO_NAME" || { echo -e '\033[31mОшибка: не удалось перейти в директорию $REPO_NAME\033[0m'; return 1; }
+
+    git checkout develop
+    if [ $? -ne 0 ]; then
+      echo -e '\033[31mОшибка: не удалось переключиться на ветку develop\033[0m'
+      return 1
+    fi
+
+    code .
   fi
-
-  REPO_NAME=$(echo "$1" | awk -F / '{print $NF}' | sed -r 's/.git+//')
-  cd "$REPO_NAME" || { echo -e '\033[31mОшибка: не удалось перейти в директорию $REPO_NAME\033[0m'; return 1; }
-
-  git checkout develop
-  if [ $? -ne 0 ]; then
-    echo -e '\033[31mОшибка: не удалось переключиться на ветку develop\033[0m'
-    return 1
-  fi
-
-  code .
 
   echo -e '\033[32mCheck clang-format\033[0m'
   cd src || { echo -e '\033[31mОшибка: директория src не найдена\033[0m'; return 1; }
@@ -134,30 +136,18 @@ function check {
   rm -rf .clang-format
 
   echo -e '\033[32mCpp check\033[0m'
-  cppcheck --enable=all --suppress=missingIncludeSystem *.c
-  if [ $? -ne 0 ]; then
-    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.c\033[0m'
-    return 1
-  fi
 
-  cppcheck --enable=all --suppress=missingIncludeSystem *.h
-  if [ $? -ne 0 ]; then
-    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.h\033[0m'
-    return 1
-  fi
+  FILES=$(find . -type f \( -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.cc" \))
 
-  cppcheck --enable=all --suppress=missingIncludeSystem *.cpp
-  if [ $? -ne 0 ]; then
-    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.cpp\033[0m'
-    return 1
+  if [ -n "$FILES" ]; then
+    echo "$FILES" | xargs cppcheck --enable=all --suppress=missingIncludeSystem
+    if [ $? -ne 0 ]; then
+      echo -e '\033[31mОшибка: проблемы с cppcheck\033[0m'
+      return 1
+    fi
+  else
+    echo -e '\033[33mПредупреждение: файлы для анализа cppcheck не найдены\033[0m'
   fi
-
-  cppcheck --enable=all --suppress=missingIncludeSystem *.cc
-  if [ $? -ne 0 ]; then
-    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.cc\033[0m'
-    return 1
-  fi
-
   return 0
 }
 
