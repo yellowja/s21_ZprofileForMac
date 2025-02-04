@@ -134,9 +134,27 @@ function check {
   rm -rf .clang-format
 
   echo -e '\033[32mCpp check\033[0m'
-  cppcheck --enable=all --suppress=missingIncludeSystem *.c *.h *.cpp *.cc
+  cppcheck --enable=all --suppress=missingIncludeSystem *.c
   if [ $? -ne 0 ]; then
-    echo -e '\033[31mОшибка: проблемы с cppcheck\033[0m'
+    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.c\033[0m'
+    return 1
+  fi
+
+  cppcheck --enable=all --suppress=missingIncludeSystem *.h
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.h\033[0m'
+    return 1
+  fi
+
+  cppcheck --enable=all --suppress=missingIncludeSystem *.cpp
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.cpp\033[0m'
+    return 1
+  fi
+
+  cppcheck --enable=all --suppress=missingIncludeSystem *.cc
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: проблемы с cppcheck файла *.cc\033[0m'
     return 1
   fi
 
