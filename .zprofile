@@ -99,20 +99,47 @@ function help {
 }
 
 function check {
-  echo '[32mClone[0m'
-  git clone $1
-  cd $(echo $1 | awk -F / '{print $NF}' | sed -r 's/.git+//')
+  echo -e '\033[32mClone\033[0m'
+  git clone "$1"
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: не удалось клонировать репозиторий\033[0m'
+    return 1
+  fi
+
+  REPO_NAME=$(echo "$1" | awk -F / '{print $NF}' | sed -r 's/.git+//')
+  cd "$REPO_NAME" || { echo -e '\033[31mОшибка: не удалось перейти в директорию $REPO_NAME\033[0m'; return 1; }
+
   git checkout develop
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: не удалось переключиться на ветку develop\033[0m'
+    return 1
+  fi
+
   code .
 
-  echo '[32mCheck clang-format[0m'
-  cd src
+  echo -e '\033[32mCheck clang-format\033[0m'
+  cd src || { echo -e '\033[31mОшибка: директория src не найдена\033[0m'; return 1; }
+
   cp ../materials/linters/.clang-format .
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: не удалось скопировать .clang-format\033[0m'
+    return 1
+  fi
+
   clang-format -n $(find . -type f -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.cc")
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: проблемы с clang-format\033[0m'
+    return 1
+  fi
   rm -rf .clang-format
 
-  echo '[32mCpp check[0m'
+  echo -e '\033[32mCpp check\033[0m'
   cppcheck --enable=all --suppress=missingIncludeSystem *.c *.h *.cpp *.cc
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: проблемы с cppcheck\033[0m'
+    return 1
+  fi
+
   return 0
 }
 
