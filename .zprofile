@@ -62,14 +62,26 @@ function init {
       echo "Установка завершена. Qt Creator установлен в $INSTALL_DIR.\nВ настройках укажите путь до /usr/local/Qt-6.6.2/bin/qmake6"
     fi
 
-    if [ "$1" = "-torb" ]; then
-      installdmg "https://tor.eprci.net/dist/torbrowser/13.5.2/tor-browser-macos-13.5.2.dmg"
+    if [ "$1" = "-tor" ]; then
+        echo "Поиск последней стабильной версии Tor Browser..."
+        TOR_MIRROR="https://tor.zilog.es/dist/torbrowser/"
+        LATEST_VERSION=$(curl -s "$TOR_MIRROR" | grep -o 'href="[0-9]\+\.[0-9]\+\.[0-9]\+/\?"' | sort -V | tail -1 | sed 's/href="//;s/\/"//')
+        
+        if [ -z "$LATEST_VERSION" ]; then
+            echo "Не удалось определить последнюю версию Tor Browser."
+            return 1
+        fi
+
+        TOR_URL="${TOR_MIRROR}${LATEST_VERSION}/tor-browser-macos-${LATEST_VERSION}.dmg"
+        echo "Найдена последняя версия: $LATEST_VERSION"
+        echo "Ссылка для скачивания: $TOR_URL"
+        
+        installdmg "$TOR_URL"
     fi
 
     if [ "$1" = "-install" ]; then
-      installdmg "$2"
+        installdmg "$2"
     fi
-
 }
 
 function push {
@@ -103,20 +115,55 @@ function help {
 }
 
 function check {
-  echo '[32mClone[0m'
-  git clone $1
-  cd $(echo $1 | awk -F / '{print $NF}' | sed -r 's/.git+//')
-  git checkout develop
-  code .
+  if [ -n "$1" ]; then
+    echo -e '\033[32mClone\033[0m'
+    git clone "$1"
+    if [ $? -ne 0 ]; then
+      echo -e '\033[31mОшибка: не удалось клонировать репозиторий\033[0m'
+      return 1
+    fi
 
-  echo '[32mCheck clang-format[0m'
-  cd src
+    REPO_NAME=$(echo "$1" | awk -F / '{print $NF}' | sed -r 's/.git+//')
+    cd "$REPO_NAME" || { echo -e '\033[31mОшибка: не удалось перейти в директорию $REPO_NAME\033[0m'; return 1; }
+
+    git checkout develop
+    if [ $? -ne 0 ]; then
+      echo -e '\033[31mОшибка: не удалось переключиться на ветку develop\033[0m'
+      return 1
+    fi
+
+    code .
+  fi
+
+  echo -e '\033[32mCheck clang-format\033[0m'
+  cd src || { echo -e '\033[31mОшибка: директория src не найдена\033[0m'; return 1; }
+
   cp ../materials/linters/.clang-format .
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: не удалось скопировать .clang-format\033[0m'
+    return 1
+  fi
+
   clang-format -n $(find . -type f -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.cc")
+  if [ $? -ne 0 ]; then
+    echo -e '\033[31mОшибка: проблемы с clang-format\033[0m'
+    return 1
+  fi
   rm -rf .clang-format
 
-  echo '[32mCpp check[0m'
-  cppcheck --enable=all --suppress=missingIncludeSystem *.c *.h *.cpp *.cc
+  echo -e '\033[32mCpp check\033[0m'
+
+  FILES=$(find . -type f \( -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.cc" \))
+
+  if [ -n "$FILES" ]; then
+    echo "$FILES" | xargs cppcheck --enable=all --suppress=missingIncludeSystem
+    if [ $? -ne 0 ]; then
+      echo -e '\033[31mОшибка: проблемы с cppcheck\033[0m'
+      return 1
+    fi
+  else
+    echo -e '\033[33mПредупреждение: файлы для анализа cppcheck не найдены\033[0m'
+  fi
   return 0
 }
 
@@ -190,73 +237,39 @@ echo -n "$reset"
 echo "$cyan"'----|Cleanup  ended|----|'
 }
 
-
-function roll {
-roll=$((RANDOM % 6 + 1))
-
-print_dice() {
-    case $1 in
-        1)
-            echo "┌─────┐
-│     │
-│  *  │
-│     │
-└─────┘
-"
-            ;;
-        2)
-            echo "┌─────┐
-│ *   │
-│     │
-│   * │
-└─────┘
-"
-            ;;
-        3)
-            echo "┌─────┐
-│ *   │
-│  *  │
-│   * │
-└─────┘
-"
-            ;;
-        4)
-            echo "┌─────┐
-│ * * │
-│     │
-│ * * │
-└─────┘
-"
-            ;;
-        5)
-            echo "┌─────┐
-│ * * │
-│  *  │
-│ * * │
-└─────┘
-"
-            ;;
-        6)
-            echo "┌─────┐
-│ * * │
-│ * * │
-│ * * │
-└─────┘
-"
-            ;;
-    esac
-}
-print_dice $roll
-}
-
 function wttr {
 curl "https://wttr.in/Novosibirsk?lang=ru"
 }
 
+function freln {
+  local src_path=$1
+  local goinfre_folder=${2:-"links"}  # Если второй аргумент не указан, присваиваем "links"
+  local goinfre_path=~/goinfre/$goinfre_folder/$(basename "$src_path")  # Перемещаем саму папку
+
+  # Проверяем, что первый аргумент (путь до папки) передан
+  if [ -z "$src_path" ]; then
+    echo "Usage: freln <source_path> [goinfre_subfolder]"
+    return 1
+  fi
+
+  # Создаем целевую папку в goinfre, если она ещё не существует
+  mkdir -p "$(dirname "$goinfre_path")"
+
+  # Если исходная папка существует, перемещаем её в goinfre
+  if [ -d "$src_path" ]; then
+    mv "$src_path" "$goinfre_path"
+  fi
+
+  # Создаем символическую ссылку на новое местоположение
+  ln -s "$goinfre_path" "$src_path"
+
+  echo "Moved $src_path to $goinfre_path and created a symlink"
+}
+
 function dockerln {
-rm -rf ~/Library/Containers/com.docker.docker
-mkdir -p ~/goinfre/Docker/Data
-ln -s ~/goinfre/Docker ~/Library/Containers/com.docker.docker
+  rm -rf ~/Library/Containers/com.docker.docker
+  mkdir -p ~/goinfre/Docker/Data
+  ln -s ~/goinfre/Docker ~/Library/Containers/com.docker.docker
 }
 
 
